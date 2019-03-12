@@ -1,0 +1,6 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.mf.gov.pl/uslugiBiznesowe/uslugiDomenowe/AP/WeryfikacjaVAT/2018/03/01">
+         <soapenv:Header/>
+         <soapenv:Body>
+         <ns:NIP>1231202106</ns:NIP>
+         </soapenv:Body>
+        </soapenv:Envelope>
