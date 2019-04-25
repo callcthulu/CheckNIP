@@ -38,6 +38,7 @@ for n, vatUe in enumerate(NIPdf["VATUE"]):
     NIPdf.at[n,"GateTextResponse"] = r.status_codes._codes[response.status_code][0] #response http code description
     if response.status_code == 200:
         print(response.text)
+#TO-DO: unpack data to dataframe
        # NIPdf.at[n, "MFResponse"] = response.text.split("<Kod>",1)[1].split("</Kod",1)[0] #response letter from mf gate
        # NIPdf.at[n, "MFTextResponse"] = response.text.split("<Komunikat>",1)[1].split("</Komunikat",1)[0] #response text from mf gate
        # print( response.text.split("<Komunikat>",1)[1].split("</Komunikat",1)[0])
@@ -45,5 +46,3 @@ for n, vatUe in enumerate(NIPdf["VATUE"]):
 
 pd.set_option("display.max_columns", 7)
 print(NIPdf.head())
-
-
