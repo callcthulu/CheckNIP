@@ -1,10 +1,10 @@
 import requests as r
 import pandas as pd
-import time
 
 
 
-NIPdf = pd.read_csv("C:/Users/oleli/Desktop/NIPlist.txt", names=["NIP"])
+#NIPdf = pd.read_csv("C:/Users/oleli/Desktop/NIPlist.txt", names=["NIP"])
+NIPdf = pd.DataFrame({"NIP":["7630003498","8730006829","1111111111"]})
 NIPdf.insert(1,"GateResponse",None)
 NIPdf.insert(2, "GateTextResponse",None)
 NIPdf.insert(3,"MFResponse",None)
@@ -36,10 +36,7 @@ for n, NIP in enumerate(NIPdf["NIP"]):
         NIPdf.at[n, "MFTextResponse"] = response.text.split("<Komunikat>",1)[1].split("</Komunikat",1)[0] #response text from mf gate
         print( response.text.split("<Komunikat>",1)[1].split("</Komunikat",1)[0])
     #if n == 1: break
-    counter = n
+    #counter = n
 
 pd.set_option("display.max_columns", 7)
 print(NIPdf.head())
-print(counter)
-
-
