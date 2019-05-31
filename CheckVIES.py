@@ -1,11 +1,16 @@
 import requests as r
 import pandas as pd
 
+#set proxy setting
 ifproxy = 0
+###File input
 #NIPdf = pd.read_csv("C:/Users/oleli/Desktop/NIPlist.txt", names=["NIP"])
+#NIPdf.insert(1,"RawVATUE",None)
+###Test intput - comment for SQL Server
 NipList = ["PL7630003498","PL8730006829","PT504220560","DE111628131","GB195929307"]
 SQL_in = pd.DataFrame({"VATUE":NipList})
 SQL_in.insert(1,"RawVATUE",None)
+###SQL Server input
 NIPdf = SQL_in
 NIPdf.insert(2,"GateResponse",None)
 NIPdf.insert(3, "GateTextResponse",None)
@@ -55,4 +60,7 @@ for n, vatUe in enumerate(NIPdf["VATUE"]):
         if NIPdf.at[n, "CompanyType"] == "---":
             NIPdf.at[n, "CompanyType"] = None
 
+###SQL Server oputput
 SQL_out = NIPdf
+###print output
+#print(NIPdf.head())

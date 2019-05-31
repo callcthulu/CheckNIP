@@ -1,7 +1,16 @@
 import requests as r
 import pandas as pd
 
-SQL_in = pd.read_csv("C:/Users/oleli/Desktop/NIPlist.txt", names=["NIP"])
+#set proxy setting
+ifproxy = 0
+###File connector -comment for SQL Server Connector
+#SQL_in = pd.read_csv("C:/Users/oleli/Desktop/NIPlist.txt", names=["NIP"])
+###Test
+NipList = ["7630003498","8730006829","1111111111"]
+SQL_in = pd.DataFrame({"NIP":NipList})
+###Common:
+SQL_in.insert(1,"RawNIP",None)
+###SQL Server:
 NIPdf = SQL_in
 NIPdf.insert(2,"GateResponse",None)
 NIPdf.insert(3, "GateTextResponse",None)
@@ -21,7 +30,10 @@ body = """ <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/enve
                  </soapenv:Body>
                 </soapenv:Envelope>
 """
-proxy ={"<past proxy here>"}
+if ifproxy:
+    proxy ={"<past proxy here>"}
+else:
+    proxy = None
 
 for n, NIP in enumerate(NIPdf["NIP"]):
     response = r.get(url
@@ -35,4 +47,7 @@ for n, NIP in enumerate(NIPdf["NIP"]):
         NIPdf.at[n, "MFResponse"] = response.text.split("<Kod>",1)[1].split("</Kod",1)[0] #response letter from mf gate
         NIPdf.at[n, "MFTextResponse"] = response.text.split("<Komunikat>",1)[1].split("</Komunikat",1)[0] #response text from mf gate
 
-SQL_out = NIPdf
+###SQL Server output
+#SQL_out = NIPdf
+###print output
+print(NIPdf["MFTextResponse"].str.slice(45,100,1))
